@@ -22,12 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Environment files (frontend and backend) — never commit real secrets.
-# Backend also carries its own Laravel .gitignore covering vendor/, storage/, etc.
-.env
-.env.local
-.env.production
-.env.backup
-!.env.example
-Thumbs.db
