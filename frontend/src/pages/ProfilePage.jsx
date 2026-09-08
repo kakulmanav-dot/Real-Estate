@@ -63,8 +63,9 @@ export default function ProfilePage() {
           <h2 className="text-lg font-semibold mb-4">Account Details</h2>
           <form onSubmit={handleProfileSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm text-gray-600 mb-1">Full Name</label>
+              <label htmlFor="profile-name" className="block text-sm text-gray-600 mb-1">Full Name</label>
               <input
+                id="profile-name"
                 className="w-full border border-gray-300 rounded py-2 px-3"
                 value={profileForm.name}
                 onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
@@ -72,8 +73,9 @@ export default function ProfilePage() {
               {profileErrors.name && <p className="text-red-500 text-xs mt-1">{profileErrors.name[0]}</p>}
             </div>
             <div>
-              <label className="block text-sm text-gray-600 mb-1">Email</label>
+              <label htmlFor="profile-email" className="block text-sm text-gray-600 mb-1">Email</label>
               <input
+                id="profile-email"
                 type="email"
                 className="w-full border border-gray-300 rounded py-2 px-3"
                 value={profileForm.email}
@@ -82,8 +84,9 @@ export default function ProfilePage() {
               {profileErrors.email && <p className="text-red-500 text-xs mt-1">{profileErrors.email[0]}</p>}
             </div>
             <div>
-              <label className="block text-sm text-gray-600 mb-1">Phone</label>
+              <label htmlFor="profile-phone" className="block text-sm text-gray-600 mb-1">Phone</label>
               <input
+                id="profile-phone"
                 className="w-full border border-gray-300 rounded py-2 px-3"
                 value={profileForm.phone}
                 onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
@@ -103,8 +106,9 @@ export default function ProfilePage() {
           <h2 className="text-lg font-semibold mb-4">Change Password</h2>
           <form onSubmit={handlePasswordSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm text-gray-600 mb-1">Current Password</label>
+              <label htmlFor="profile-current-password" className="block text-sm text-gray-600 mb-1">Current Password</label>
               <input
+                id="profile-current-password"
                 type="password"
                 className="w-full border border-gray-300 rounded py-2 px-3"
                 value={passwordForm.current_password}
@@ -115,8 +119,9 @@ export default function ProfilePage() {
               )}
             </div>
             <div>
-              <label className="block text-sm text-gray-600 mb-1">New Password</label>
+              <label htmlFor="profile-new-password" className="block text-sm text-gray-600 mb-1">New Password</label>
               <input
+                id="profile-new-password"
                 type="password"
                 className="w-full border border-gray-300 rounded py-2 px-3"
                 value={passwordForm.password}
@@ -125,8 +130,9 @@ export default function ProfilePage() {
               {passwordErrors.password && <p className="text-red-500 text-xs mt-1">{passwordErrors.password[0]}</p>}
             </div>
             <div>
-              <label className="block text-sm text-gray-600 mb-1">Confirm New Password</label>
+              <label htmlFor="profile-password-confirmation" className="block text-sm text-gray-600 mb-1">Confirm New Password</label>
               <input
+                id="profile-password-confirmation"
                 type="password"
                 className="w-full border border-gray-300 rounded py-2 px-3"
                 value={passwordForm.password_confirmation}

@@ -37,9 +37,17 @@ class Setting extends Model
     public static function allSettings(): array
     {
         return Cache::rememberForever(self::CACHE_KEY, function () {
-            $stored = static::query()->pluck('value', 'key')->toArray();
+            $defaults = static::defaults();
 
-            return array_merge(static::defaults(), $stored);
+            // Only ever surface known, whitelisted keys through the public API —
+            // never merge in arbitrary rows a future migration/seed/admin action
+            // might store under an unexpected key (e.g. an internal webhook secret).
+            $stored = static::query()
+                ->whereIn('key', array_keys($defaults))
+                ->pluck('value', 'key')
+                ->toArray();
+
+            return array_merge($defaults, $stored);
         });
     }
 

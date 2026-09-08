@@ -37,8 +37,9 @@ export default function ResetPasswordPage() {
         <h1 className="text-2xl font-bold text-center mb-6">Reset your password</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Email</label>
+            <label htmlFor="reset-email" className="block text-sm text-gray-600 mb-1">Email</label>
             <input
+              id="reset-email"
               type="email"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"
@@ -48,8 +49,9 @@ export default function ResetPasswordPage() {
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email[0]}</p>}
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-1">New Password</label>
+            <label htmlFor="reset-password" className="block text-sm text-gray-600 mb-1">New Password</label>
             <input
+              id="reset-password"
               type="password"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"
@@ -59,8 +61,9 @@ export default function ResetPasswordPage() {
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password[0]}</p>}
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Confirm New Password</label>
+            <label htmlFor="reset-password-confirmation" className="block text-sm text-gray-600 mb-1">Confirm New Password</label>
             <input
+              id="reset-password-confirmation"
               type="password"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"

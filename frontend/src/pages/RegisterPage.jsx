@@ -39,8 +39,9 @@ export default function RegisterPage() {
         <h1 className="text-2xl font-bold text-center mb-6">Create your account</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Full Name</label>
+            <label htmlFor="register-name" className="block text-sm text-gray-600 mb-1">Full Name</label>
             <input
+              id="register-name"
               type="text"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"
@@ -50,8 +51,9 @@ export default function RegisterPage() {
             {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name[0]}</p>}
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Email</label>
+            <label htmlFor="register-email" className="block text-sm text-gray-600 mb-1">Email</label>
             <input
+              id="register-email"
               type="email"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"
@@ -61,8 +63,9 @@ export default function RegisterPage() {
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email[0]}</p>}
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Phone (optional)</label>
+            <label htmlFor="register-phone" className="block text-sm text-gray-600 mb-1">Phone (optional)</label>
             <input
+              id="register-phone"
               type="tel"
               className="w-full border border-gray-300 rounded py-2 px-3"
               value={form.phone}
@@ -70,8 +73,9 @@ export default function RegisterPage() {
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Password</label>
+            <label htmlFor="register-password" className="block text-sm text-gray-600 mb-1">Password</label>
             <input
+              id="register-password"
               type="password"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"
@@ -81,8 +85,9 @@ export default function RegisterPage() {
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password[0]}</p>}
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Confirm Password</label>
+            <label htmlFor="register-password-confirmation" className="block text-sm text-gray-600 mb-1">Confirm Password</label>
             <input
+              id="register-password-confirmation"
               type="password"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"

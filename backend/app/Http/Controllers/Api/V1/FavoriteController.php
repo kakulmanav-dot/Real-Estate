@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Enums\PropertyStatus;
 use App\Http\Controllers\Concerns\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PropertyListResource;
@@ -38,6 +39,11 @@ class FavoriteController extends Controller
 
     public function store(Request $request, Property $property)
     {
+        abort_unless(
+            $property->status === PropertyStatus::Published && $property->published_at !== null,
+            404
+        );
+
         $favorite = Favorite::firstOrCreate([
             'user_id' => $request->user()->id,
             'property_id' => $property->id,

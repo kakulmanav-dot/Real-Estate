@@ -35,8 +35,9 @@ export default function LoginPage() {
         <h1 className="text-2xl font-bold text-center mb-6">Sign in to your account</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Email</label>
+            <label htmlFor="login-email" className="block text-sm text-gray-600 mb-1">Email</label>
             <input
+              id="login-email"
               type="email"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"
@@ -46,8 +47,9 @@ export default function LoginPage() {
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email[0]}</p>}
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Password</label>
+            <label htmlFor="login-password" className="block text-sm text-gray-600 mb-1">Password</label>
             <input
+              id="login-password"
               type="password"
               required
               className="w-full border border-gray-300 rounded py-2 px-3"

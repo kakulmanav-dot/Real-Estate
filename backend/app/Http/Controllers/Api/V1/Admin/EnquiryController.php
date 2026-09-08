@@ -81,11 +81,11 @@ class EnquiryController extends Controller
             foreach ($enquiries as $enquiry) {
                 fputcsv($handle, [
                     $enquiry->id,
-                    $enquiry->name,
-                    $enquiry->email,
-                    $enquiry->phone,
-                    $enquiry->property?->title,
-                    $enquiry->subject,
+                    self::csvSafe($enquiry->name),
+                    self::csvSafe($enquiry->email),
+                    self::csvSafe($enquiry->phone),
+                    self::csvSafe($enquiry->property?->title),
+                    self::csvSafe($enquiry->subject),
                     $enquiry->status->value,
                     $enquiry->created_at,
                 ]);
@@ -97,5 +97,18 @@ class EnquiryController extends Controller
         return response()->streamDownload($callback, $filename, [
             'Content-Type' => 'text/csv',
         ]);
+    }
+
+    /**
+     * Neutralize CSV/spreadsheet formula injection by prefixing a leading
+     * =, +, -, or @ with a single quote, per OWASP guidance.
+     */
+    private static function csvSafe(?string $value): ?string
+    {
+        if ($value === null || $value === '') {
+            return $value;
+        }
+
+        return preg_match('/^[=+\-@]/', $value) ? "'".$value : $value;
     }
 }

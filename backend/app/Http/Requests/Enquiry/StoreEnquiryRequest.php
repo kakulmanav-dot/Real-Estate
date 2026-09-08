@@ -21,15 +21,11 @@ class StoreEnquiryRequest extends FormRequest
             'subject' => ['nullable', 'string', 'max:255'],
             'message' => ['required', 'string', 'max:5000'],
             'source' => ['nullable', 'string', 'max:100'],
-            // Honeypot field: must always be left empty by real users.
-            'website' => ['nullable', 'size:0'],
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'website.size' => 'Submission rejected.',
+            // Honeypot field: real users never see or fill this. Deliberately
+            // unconstrained here — rejecting it via a validation rule would
+            // return a distinguishable error that tips off bots. The
+            // controller silently accepts-but-discards a filled honeypot instead.
+            'website' => ['nullable', 'string'],
         ];
     }
 }

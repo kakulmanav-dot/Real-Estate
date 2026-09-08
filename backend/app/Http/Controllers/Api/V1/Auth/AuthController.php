@@ -15,7 +15,6 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
@@ -82,13 +81,9 @@ class AuthController extends Controller
 
     public function forgotPassword(ForgotPasswordRequest $request)
     {
-        $status = Password::sendResetLink($request->only('email'));
-
-        if ($status !== Password::RESET_LINK_SENT && $status !== Password::RESET_THROTTLED) {
-            return $this->error('We could not find a user with that email address.', 422, [
-                'email' => [__($status)],
-            ]);
-        }
+        // Always return the same generic response regardless of whether the
+        // email exists, so this endpoint cannot be used to enumerate accounts.
+        Password::sendResetLink($request->only('email'));
 
         return $this->success(null, 'If an account exists for that email, a password reset link has been sent.');
     }

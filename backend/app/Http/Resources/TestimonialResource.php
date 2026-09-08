@@ -2,11 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-/** @mixin \App\Models\Testimonial */
+/** @mixin Testimonial */
 class TestimonialResource extends JsonResource
 {
     public function toArray(Request $request): array

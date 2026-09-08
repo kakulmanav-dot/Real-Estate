@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Middleware\EnsureUserIsAdmin;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -22,6 +22,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => EnsureUserIsAdmin::class,
         ]);
+
+        // This is a pure API — there is no "login" web route to redirect an
+        // unauthenticated guest to. Without this, Laravel's default Authenticate
+        // middleware calls route('login') for any request that doesn't explicitly
+        // send an "Accept: application/json" header, which throws a
+        // RouteNotFoundException (500) instead of a clean 401 JSON response.
+        $middleware->redirectGuestsTo(fn () => null);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(fn (Request $request) => $request->is('api/*') || $request->expectsJson());
@@ -72,7 +79,7 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-        $exceptions->render(function (\Throwable $e, Request $request) {
+        $exceptions->render(function (Throwable $e, Request $request) {
             if ($request->is('api/*') && ! app()->isProduction()) {
                 return null;
             }
